@@ -1,0 +1,20 @@
+version: '2'
+services:
+  web:
+    build: .
+    container_name: landingpage
+    volumes:
+      - ./src:/app
+    ports:
+      - "90:80"
+    links:
+      - serverdb
+  serverdb:
+    image: mysql:5.7
+    container_name: serverdb
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+    ports:
+      - 3406:3306
